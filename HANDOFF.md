@@ -7,7 +7,7 @@
 ## Next steps
 1. Stefan: test locally with `serve.bat`, try "Add demo data" on the Data page.
 2. Set up the Google Sheet + Apps Script (README section 2) and paste the Web App URL into `js/config.js`. Shared mode has not yet been tested against a live Apps Script deployment.
-3. Publish to GitHub Pages (README section 3).
+3. Done: published at https://rmit-magi.github.io/grap2791-ueq/ (repo RMIT-MAGI/grap2791-ueq). Still in local mode until APPS_SCRIPT_URL is set and pushed.
 
 ## Open decisions
 - Benchmark comparison included by default (not explicitly confirmed by Stefan).

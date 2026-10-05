@@ -32,3 +32,8 @@
 - Prose: Australian English, no em dashes in user-facing writing.
 - Web files keep conventional names (index.html etc.) for GitHub Pages; the YYYYMMDD- prefix applies to new non-site documents and exports (CSV export is named YYYYMMDD-ueqs-responses.csv).
 - Use relative paths only.
+
+## Deployment
+- GitHub repo: https://github.com/RMIT-MAGI/grap2791-ueq (public, RMIT-MAGI organisation, branch main)
+- Live site (GitHub Pages, main branch root): https://rmit-magi.github.io/grap2791-ueq/
+- Deploy updates: commit in this folder and `git push` (commits use the GitHub no-reply email for CubeDirector). Pages rebuilds in about a minute.
