@@ -1,4 +1,9 @@
 /**
+ * @OnlyCurrentDoc
+ * Limits this script's permission to the one Google Sheet it is attached to,
+ * instead of all spreadsheets in the account.
+ */
+/**
  * UEQ-S Class Survey: Google Apps Script backend
  * ------------------------------------------------
  * 1. Create a new Google Sheet (any name).
