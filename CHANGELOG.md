@@ -10,3 +10,4 @@
 - Deployed to GitHub: repo RMIT-MAGI/grap2791-ueq (public), GitHub Pages enabled from main / root. Live at https://rmit-magi.github.io/grap2791-ueq/. Installed GitHub CLI on Stefan's PC and logged in as CubeDirector.
 - Connected Google Sheet backend (Apps Script web app under me@stefangreuter.com, access: Anyone). Tested list/submit/deleteAll round trip, then switched the live site to shared mode.
 - Added @OnlyCurrentDoc to apps-script/Code.gs so the script only requests access to its own Google Sheet (requires pasting into Apps Script, redeploying a new version and re-authorising).
+- Home page: added 'About this tool' section with UEQ-S attribution and references, and the credit line 'Developed by Stefan Greuter in 2026 for MAGI at RMIT University'.
