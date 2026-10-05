@@ -1,4 +1,4 @@
-# HANDOFF
+﻿# HANDOFF
 
 **Status (2026-10-05):** v1 of the site built and tested in local mode (survey submit, duplicate-number dialog, results rendering, data table, CSV, demo data, delete-all), light and dark, desktop and mobile. Glossary page added and linked from Results.
 
@@ -7,7 +7,7 @@
 ## Next steps
 1. Stefan: test locally with `serve.bat`, try "Add demo data" on the Data page.
 2. Set up the Google Sheet + Apps Script (README section 2) and paste the Web App URL into `js/config.js`. Shared mode has not yet been tested against a live Apps Script deployment.
-3. Done: published at https://rmit-magi.github.io/grap2791-ueq/ (repo RMIT-MAGI/grap2791-ueq). Still in local mode until APPS_SCRIPT_URL is set and pushed.
+3. Done: published at https://rmit-magi.github.io/grap2791-ueq/ (repo RMIT-MAGI/grap2791-ueq). Shared mode live: APPS_SCRIPT_URL set and pushed; backend round trip tested.
 
 ## Open decisions
 - Benchmark comparison included by default (not explicitly confirmed by Stefan).

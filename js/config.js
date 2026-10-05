@@ -9,7 +9,7 @@
      See README.md, section "Set up the shared Google Sheet".
    ========================================================================= */
 window.UEQ_CONFIG = {
-  APPS_SCRIPT_URL: "",
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwD7zkHG_ir6-yg49r5qfl0d7YTmxxSWPnzbLBLBMgeKMi_Sn4h52xE-iJsGXDlLFDMdg/exec",
 
   // Shown in the page header
   COURSE_TITLE: "GRAP2791 AGI Workshop",
