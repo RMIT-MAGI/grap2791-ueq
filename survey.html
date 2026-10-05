@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UEQ-S Survey</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232a78d6'/%3E%3Cpath d='M9 22V14M16 22V9M23 22V17' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body data-page="survey">
+<header class="site-header"><div class="inner">
+  <a class="brand" href="index.html">UEQ-S Class Survey<small data-course></small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="index.html" data-page="home">Home</a>
+    <a href="survey.html" data-page="survey">Survey</a>
+    <a href="results.html" data-page="results">Results</a>
+    <a href="data.html" data-page="data">Data</a>
+    <a href="glossary.html" data-page="glossary">Glossary</a>
+  </nav>
+  <span data-mode class="mode-badge"></span>
+</div></header>
+
+<main class="narrow">
+  <div id="formView">
+    <h1>Rate the game</h1>
+    <p class="muted">Please tell us what you thought of the game you just played. Each line shows a pair of opposite words. Select the circle that best matches your impression: the closer to a word, the more strongly it applies. Go with your first reaction. There are no right or wrong answers.</p>
+
+    <form id="surveyForm" novalidate>
+      <div class="card">
+        <div class="field" style="margin:0">
+          <label for="participant">Participant number</label>
+          <input class="input" id="participant" name="participant" type="number" inputmode="numeric" min="1" required autocomplete="off">
+          <p class="small muted" style="margin:6px 0 0">Use the number your tutor gave you. Do not enter your name.</p>
+        </div>
+      </div>
+
+      <p class="small muted" style="margin-bottom:8px">In my opinion, the game is…</p>
+      <div id="items"></div>
+
+      <div id="formMsg" role="alert"></div>
+      <div class="btn-row" style="margin-top:16px">
+        <button class="btn primary" type="submit" id="submitBtn">Submit my answers</button>
+        <span class="small muted" id="progress"></span>
+      </div>
+    </form>
+  </div>
+
+  <div id="doneView" class="card done" hidden>
+    <div class="tick" aria-hidden="true">✓</div>
+    <h1>Thank you!</h1>
+    <p class="muted">Your answers for participant <b id="donePid"></b> have been saved.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn primary" href="results.html">See the class results</a>
+      <button class="btn" id="againBtn" type="button">Enter another response</button>
+    </div>
+  </div>
+</main>
+
+<div class="modal-backdrop" id="existsModal" role="dialog" aria-modal="true" aria-labelledby="existsTitle">
+  <div class="modal">
+    <h2 id="existsTitle" style="color:var(--text)">Number already used</h2>
+    <p>Participant <b id="existsPid"></b> has already submitted answers. Replace them with these new answers?</p>
+    <p class="small muted">If this is not your number, choose Cancel and check the number with your tutor.</p>
+    <div class="btn-row" style="justify-content:flex-end">
+      <button class="btn" id="existsCancel" type="button">Cancel</button>
+      <button class="btn primary" id="existsReplace" type="button">Replace my answers</button>
+    </div>
+  </div>
+</div>
+<footer class="site-footer">UEQ-S © Schrepp, Hinderks &amp; Thomaschewski. Questionnaire and benchmark from <a href="https://www.ueq-online.org/" target="_blank" rel="noopener">ueq-online.org</a>. For teaching use.</footer>
+<script src="js/config.js"></script>
+<script src="js/ueq.js"></script>
+<script src="js/store.js"></script>
+<script>
+(function () {
+  const cfg = window.UEQ_CONFIG;
+  const pidInput = document.getElementById("participant");
+  pidInput.max = cfg.MAX_PARTICIPANT;
+  const itemsEl = document.getElementById("items");
+
+  UEQ.ITEMS.forEach((it, idx) => {
+    const fs = document.createElement("fieldset");
+    fs.className = "item";
+    fs.id = "f_" + it.id;
+    let dots = "";
+    for (let v = 1; v <= 7; v++) {
+      dots += `<label class="dot"><input type="radio" name="${it.id}" value="${v}" aria-label="${v} of 7"><span>${v}</span></label>`;
+    }
+    fs.innerHTML = `<legend>Item ${idx + 1}: ${it.left} (1) to ${it.right} (7)</legend>
+      <div class="item-num">${idx + 1} / ${UEQ.ITEMS.length}</div>
+      <div class="item-row">
+        <span class="term left">${it.left}</span>
+        <div class="dots">${dots}</div>
+        <span class="term right">${it.right}</span>
+      </div>`;
+    itemsEl.appendChild(fs);
+  });
+
+  const form = document.getElementById("surveyForm");
+  const msg = document.getElementById("formMsg");
+  const progress = document.getElementById("progress");
+  const btn = document.getElementById("submitBtn");
+
+  function answered() { return UEQ.ITEMS.filter(it => form.querySelector(`input[name="${it.id}"]:checked`)).length; }
+  function updateProgress() { progress.textContent = `${answered()} of ${UEQ.ITEMS.length} answered`; }
+  form.addEventListener("change", e => {
+    const fs = e.target.closest(".item");
+    if (fs) fs.classList.remove("missing");
+    updateProgress();
+  });
+  updateProgress();
+
+  function collect() {
+    const rec = { participant: Number(pidInput.value) };
+    const missing = [];
+    UEQ.ITEMS.forEach((it, i) => {
+      const c = form.querySelector(`input[name="${it.id}"]:checked`);
+      document.getElementById("f_" + it.id).classList.toggle("missing", !c);
+      if (!c) missing.push(i + 1); else rec[it.id] = Number(c.value);
+    });
+    return { rec, missing };
+  }
+
+  async function send(rec, overwrite) {
+    btn.disabled = true; btn.textContent = "Saving…";
+    try {
+      const res = await Store.submit(rec, overwrite);
+      if (res.status === "exists") { openExists(rec); return; }
+      document.getElementById("donePid").textContent = rec.participant;
+      document.getElementById("formView").hidden = true;
+      document.getElementById("doneView").hidden = false;
+      window.scrollTo(0, 0);
+    } catch (err) {
+      msg.innerHTML = `<div class="msg error">Could not save your answers (${err.message}). Please check your connection and try again.</div>`;
+    } finally {
+      btn.disabled = false; btn.textContent = "Submit my answers";
+    }
+  }
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    msg.innerHTML = "";
+    const pid = Number(pidInput.value);
+    if (!Number.isInteger(pid) || pid < 1 || pid > cfg.MAX_PARTICIPANT) {
+      msg.innerHTML = `<div class="msg error">Please enter a participant number between 1 and ${cfg.MAX_PARTICIPANT}.</div>`;
+      pidInput.focus(); return;
+    }
+    const { rec, missing } = collect();
+    if (missing.length) {
+      msg.innerHTML = `<div class="msg error">Please answer every item. Missing: item ${missing.join(", ")}.</div>`;
+      document.getElementById("f_q" + missing[0]).scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    send(rec, false);
+  });
+
+  const modal = document.getElementById("existsModal");
+  let pending = null;
+  function openExists(rec) { pending = rec; document.getElementById("existsPid").textContent = rec.participant; modal.classList.add("open"); document.getElementById("existsCancel").focus(); }
+  function closeExists() { modal.classList.remove("open"); pending = null; }
+  document.getElementById("existsCancel").onclick = () => { closeExists(); pidInput.focus(); };
+  document.getElementById("existsReplace").onclick = () => { const r = pending; closeExists(); send(r, true); };
+  modal.addEventListener("keydown", e => { if (e.key === "Escape") closeExists(); });
+
+  document.getElementById("againBtn").onclick = () => {
+    form.reset(); updateProgress();
+    document.querySelectorAll(".item").forEach(f => f.classList.remove("missing"));
+    document.getElementById("doneView").hidden = true;
+    document.getElementById("formView").hidden = false;
+    window.scrollTo(0, 0); pidInput.focus();
+  };
+})();
+</script>
+</body>
+</html>

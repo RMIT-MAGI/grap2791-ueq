@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UEQ-S Results</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232a78d6'/%3E%3Cpath d='M9 22V14M16 22V9M23 22V17' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body data-page="results">
+<header class="site-header"><div class="inner">
+  <a class="brand" href="index.html">UEQ-S Class Survey<small data-course></small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="index.html" data-page="home">Home</a>
+    <a href="survey.html" data-page="survey">Survey</a>
+    <a href="results.html" data-page="results">Results</a>
+    <a href="data.html" data-page="data">Data</a>
+    <a href="glossary.html" data-page="glossary">Glossary</a>
+  </nav>
+  <span data-mode class="mode-badge"></span>
+</div></header>
+
+<main>
+  <div class="toolbar">
+    <div>
+      <h1 style="margin-bottom:4px">Class results</h1>
+      <p class="muted small" style="margin:0" id="updated">Loading…</p>
+    </div>
+    <div class="btn-row">
+      <label class="small" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="excludeSusp"> Exclude suspicious responses</label>
+      <button class="btn" id="refreshBtn" type="button">Refresh</button>
+    </div>
+  </div>
+  <div id="err"></div>
+  <div id="content"></div>
+
+  <h2 style="margin-top:32px">Learn: reading the analysis</h2>
+  <p class="muted">Short explanations of the analysis are below. For definitions of every term (n, mean, median, standard deviation, Cronbach's alpha and more), see the <a href="glossary.html">statistics glossary</a>.</p>
+  <details class="learn"><summary>How to read a box plot</summary>
+    <p>The <b>box</b> holds the middle 50% of participants: its left edge is the first quartile (Q1, 25% of scores are below it) and its right edge the third quartile (Q3, 75% below). The thick line inside the box is the <b>median</b>, the middle score. The <b>whiskers</b> extend to the lowest and highest scores that are not unusually far from the box (within 1.5 × the box width). Scores beyond that are drawn as hollow circles and called <b>outliers</b>.</p>
+    <p>A narrow box means the class largely agreed. A wide box or long whiskers means opinions differed. If the median sits off-centre in the box, the distribution is skewed.</p>
+  </details>
+  <details class="learn"><summary>Why are the scores from −3 to +3?</summary>
+    <p>Students answer on a 7-point scale (1 to 7). The UEQ re-codes these to −3 (strongest agreement with the negative term) through 0 (neutral) to +3 (strongest agreement with the positive term), simply by subtracting 4. This makes the sign meaningful: negative numbers are negative impressions. Each dimension score is the mean of its four items for one participant, so a participant's score can be values like 1.25 or −0.5.</p>
+    <p>The UEQ authors suggest treating means between −0.8 and +0.8 as a <b>neutral</b> evaluation, above +0.8 as <b>positive</b> and below −0.8 as <b>negative</b>. In practice, means above +2 or below −2 are rare, because people avoid the extreme ends of scales.</p>
+  </details>
+  <details class="learn"><summary>Mean or median?</summary>
+    <p>The median is the middle value and is not pulled around by a few extreme answers. The mean uses every value and is what the UEQ benchmark is based on. When they are close, the data are roughly symmetrical. When they differ, look at the box plot to see which scores are pulling the mean away.</p>
+  </details>
+  <details class="learn"><summary>What is a 95% confidence interval?</summary>
+    <p>The class is a <b>sample</b>. If a different group of similar students played the game, their mean would be a little different. The confidence interval gives a range of plausible values for the "true" mean of the wider population. It is calculated as mean ± t × SD / √n, so it gets narrower as the sample grows. With 20 people it is often wide, which is a useful reminder not to over-interpret small differences.</p>
+  </details>
+  <details class="learn"><summary>Reliability (Cronbach's alpha) and suspicious responses</summary>
+    <p>The four items in a dimension are meant to measure the same underlying quality. <b>Cronbach's alpha</b> checks whether participants answered them consistently. Values above about 0.7 are usually considered acceptable. Alpha is unstable in small samples, and some items can be read differently in a particular context (for example "efficient" when rating a game).</p>
+    <p>The UEQ also suggests a simple check for careless answering: if a person's answers to items of the same dimension differ by more than 3 points, the pattern is unlikely to be genuine. A response flagged in <b>both</b> dimensions is marked as suspicious. Removing such responses is a judgement call that should be reported, which is why it is an option here rather than automatic.</p>
+  </details>
+  <details class="learn"><summary>What does the benchmark tell us?</summary>
+    <p>The UEQ-S benchmark contains 9,905 responses evaluating 246 interactive products. Comparing our mean with it tells us how the game's user experience ranks relative to other products. Keep in mind that the benchmark mixes many kinds of products (business software, websites, apps, games), and that our sample is small, so the category is a rough indication only.</p>
+  </details>
+</main>
+<footer class="site-footer">UEQ-S © Schrepp, Hinderks &amp; Thomaschewski. Questionnaire and benchmark from <a href="https://www.ueq-online.org/" target="_blank" rel="noopener">ueq-online.org</a>. For teaching use.</footer>
+<script src="js/config.js"></script>
+<script src="js/ueq.js"></script>
+<script src="js/store.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/results.js"></script>
+</body>
+</html>

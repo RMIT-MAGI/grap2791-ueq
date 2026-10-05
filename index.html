@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UEQ-S Class Survey</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232a78d6'/%3E%3Cpath d='M9 22V14M16 22V9M23 22V17' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body data-page="home">
+<header class="site-header"><div class="inner">
+  <a class="brand" href="index.html">UEQ-S Class Survey<small data-course></small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="index.html" data-page="home">Home</a>
+    <a href="survey.html" data-page="survey">Survey</a>
+    <a href="results.html" data-page="results">Results</a>
+    <a href="data.html" data-page="data">Data</a>
+    <a href="glossary.html" data-page="glossary">Glossary</a>
+  </nav>
+  <span data-mode class="mode-badge"></span>
+</div></header>
+
+<main>
+  <section class="card" style="padding:28px">
+    <h1>Measuring user experience with numbers</h1>
+    <p class="lead">In this activity you will play a game, rate it with a short standardised questionnaire (the UEQ-S), and then see how the whole class's answers are combined, visualised and interpreted. It is a small, complete example of quantitative data collection and analysis.</p>
+    <div class="btn-row">
+      <a class="btn primary" href="survey.html">Start the survey</a>
+      <a class="btn" href="results.html">View class results</a>
+    </div>
+  </section>
+
+  <h2>The process, step by step</h2>
+  <ol class="steps" style="margin-bottom:28px">
+    <li><h3>Experience</h3><p>Play the game for the agreed time. This is the "treatment": everyone experiences the same product before measuring.</p></li>
+    <li><h3>Measure</h3><p>Answer the 8 UEQ-S items. Each is a pair of opposite words on a 7-point scale. A standardised instrument means results can be compared across studies.</p></li>
+    <li><h3>Collect</h3><p>Every response is stored against an anonymous participant number, so data can be checked and corrected without names.</p></li>
+    <li><h3>Score</h3><p>Answers 1 to 7 are re-coded to −3 to +3. Items are averaged into two dimensions, pragmatic and hedonic quality, plus an overall score.</p></li>
+    <li><h3>Analyse</h3><p>Box plots show the spread of scores. Means, confidence intervals and a reliability check describe the data.</p></li>
+    <li><h3>Interpret</h3><p>Scores are judged against the UEQ's neutral band (−0.8 to +0.8) and a benchmark of 246 products rated by 9,905 people.</p></li>
+  </ol>
+
+  <h2>What the UEQ-S measures</h2>
+  <div class="cta-grid" style="margin-bottom:28px">
+    <div class="card" style="margin:0"><h3><span class="swatch" style="background:var(--s-pq)"></span> Pragmatic quality</h3><p class="muted small" style="margin:0">Goal-directed, task-related quality. Items: obstructive–supportive, complicated–easy, inefficient–efficient, confusing–clear.</p></div>
+    <div class="card" style="margin:0"><h3><span class="swatch" style="background:var(--s-hq)"></span> Hedonic quality</h3><p class="muted small" style="margin:0">Non-task, pleasure-related quality. Items: boring–exciting, not interesting–interesting, conventional–inventive, usual–leading edge.</p></div>
+    <div class="card" style="margin:0"><h3><span class="swatch" style="background:var(--s-ov)"></span> Overall</h3><p class="muted small" style="margin:0">The mean of all eight items, a single summary of the user experience.</p></div>
+  </div>
+
+  <h2>Pages</h2>
+  <div class="cta-grid">
+    <a class="cta" href="survey.html"><strong>Survey →</strong><span>Enter your participant number and rate the game.</span></a>
+    <a class="cta" href="results.html"><strong>Results →</strong><span>Box plots for each dimension with a plain-language report.</span></a>
+    <a class="cta" href="data.html"><strong>Data →</strong><span>All responses in a spreadsheet view, CSV download, and reset for a new cohort.</span></a>
+    <a class="cta" href="glossary.html"><strong>Glossary →</strong><span>Plain-language explanations of the statistics terms, with worked examples.</span></a>
+  </div>
+</main>
+<footer class="site-footer">UEQ-S © Schrepp, Hinderks &amp; Thomaschewski. Questionnaire and benchmark from <a href="https://www.ueq-online.org/" target="_blank" rel="noopener">ueq-online.org</a>. For teaching use.</footer>
+<script src="js/config.js"></script>
+<script src="js/ueq.js"></script>
+<script src="js/store.js"></script>
+</body>
+</html>
